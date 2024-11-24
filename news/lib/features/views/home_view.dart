@@ -23,18 +23,42 @@ class _HomeViewState extends State<HomeView> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.grey,
+              color: Colors.grey.shade300,
               borderRadius: BorderRadius.circular(
                 16,
               ),
             ),
             child: Column(
               children: [
-                Image.network(
-                  _imagePath,
-                  height: 100,
-                  width: double.infinity,
-                  fit: BoxFit.fitWidth,
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16)),
+                  child: Image.network(
+                    _imagePath,
+                    height: 100,
+                    width: double.infinity,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                const Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Gazete KBB'),
+                        Text(
+                          'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text('15 dk.'),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
