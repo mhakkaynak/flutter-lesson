@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news/features/widgets/containers/news_container.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -15,55 +16,62 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        title: Text('Haberler'),
+        centerTitle: true,
         backgroundColor: Colors.white,
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        childAspectRatio: 0.6,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.grey.shade300,
-              borderRadius: BorderRadius.circular(
-                16,
-              ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: GridView.count(
+          crossAxisCount: 2,
+          childAspectRatio: 0.6,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
+          children: [
+            NewsContainer(
+              imagePath: _imagePath,
+              title: 'Gazete KBB',
+              description:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+              time: '15 dk',
             ),
-            child: Column(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(16),
-                      topRight: Radius.circular(16)),
-                  child: Image.network(
-                    _imagePath,
-                    height: 100,
-                    width: double.infinity,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                const Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Gazete KBB'),
-                        Text(
-                          'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text('15 dk.'),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+            NewsContainer(
+              imagePath: _imagePath,
+              title: 'Gazete KBB',
+              description:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+              time: '15 dk',
             ),
-          ),
-        ],
+            NewsContainer(
+              imagePath: _imagePath,
+              title: 'Gazete KBB',
+              description:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+              time: '15 dk',
+            ),
+            NewsContainer(
+              imagePath: _imagePath,
+              title: 'Gazete KBB',
+              description:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+              time: '15 dk',
+            ),
+            NewsContainer(
+              imagePath: _imagePath,
+              title: 'Gazete KBB',
+              description:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+              time: '15 dk',
+            ),
+            NewsContainer(
+              imagePath: _imagePath,
+              title: 'Gazete KBB',
+              description:
+                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+              time: '15 dk',
+            ),
+          ],
+        ),
       ),
     );
   }
