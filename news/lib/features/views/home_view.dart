@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news/features/widgets/containers/news_container.dart';
+import '../widgets/containers/news_container.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
