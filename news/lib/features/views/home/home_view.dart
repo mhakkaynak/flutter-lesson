@@ -11,8 +11,12 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final String _imagePath =
       'https://images.unsplash.com/photo-1732058824460-d89cb7b4a38f?q=80&w=3272&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+
   @override
   Widget build(BuildContext context) {
+    /*var args = ModalRoute.of(context)!.settings.arguments as String;
+    print(args);*/
+    
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

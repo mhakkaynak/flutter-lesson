@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:news/core/navigation/navigation_manager.dart';
 import 'package:news/features/widgets/inputs/password_text_form_field.dart';
+import 'package:news/utils/constants/navigation_constants.dart';
+
+import '../home/home_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -10,9 +14,8 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final TextEditingController _emailController = TextEditingController();
-  final GlobalKey _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _passwordController = TextEditingController();
-  bool _passwordObscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +47,28 @@ class _LoginViewState extends State<LoginView> {
               ),
               PasswordTextFormField(
                 passwordController: _passwordController,
+              ),
+              const Spacer(),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    print('Login başarılı');
+                    NavigationManager.instance
+                        .navigationToPage(NavigationConstant.home);
+                    /*Navigator.push(
+                      context,
+                      MaterialPageRoute( 
+                        builder: (context) => const HomeView(),
+                      ),
+                    );*/
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: const Text('Giriş Yap'),
               ),
             ],
           ),
