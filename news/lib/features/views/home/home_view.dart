@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/containers/news_container.dart';
+import '../../widgets/containers/news_container.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -10,7 +10,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final String _imagePath =
-      'https://images.unsplash.com/photo-1731902062633-1496d7bcf95c?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+      'https://images.unsplash.com/photo-1732058824460-d89cb7b4a38f?q=80&w=3272&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
