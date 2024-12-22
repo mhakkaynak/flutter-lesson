@@ -3,6 +3,7 @@ import 'package:news/core/extensions/context_extension.dart';
 import 'package:news/core/extensions/string_extension.dart';
 import 'package:news/features/widgets/alerts/custom_alert_dialog.dart';
 import 'package:news/utils/helper/helper_functions.dart';
+import 'package:news/utils/themes/custom_theme_data.dart';
 
 class TestView extends StatefulWidget {
   const TestView({super.key});
@@ -31,9 +32,14 @@ class _TestViewState extends State<TestView> {
                 String email = 'halilgmail.com';
                 print(email.isValidEmail);
               },
-              child: Text('String extension'),
+              child: Text(
+                'String extension',
+                style: context.textTheme.headlineMedium,
+              ),
             ),
-            SizedBox(height: context.responsiveHeight(100),),
+            SizedBox(
+              height: context.responsiveHeight(100),
+            ),
             ElevatedButton(
                 onPressed: () {
                   print(context.height);
