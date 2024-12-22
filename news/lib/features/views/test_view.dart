@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:news/core/extensions/context_extension.dart';
+import 'package:news/core/extensions/string_extension.dart';
 import 'package:news/features/widgets/alerts/custom_alert_dialog.dart';
 import 'package:news/utils/helper/helper_functions.dart';
 
@@ -24,6 +26,20 @@ class _TestViewState extends State<TestView> {
               },
               child: Text('Alert Test'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                String email = 'halilgmail.com';
+                print(email.isValidEmail);
+              },
+              child: Text('String extension'),
+            ),
+            SizedBox(height: context.responsiveHeight(100),),
+            ElevatedButton(
+                onPressed: () {
+                  print(context.height);
+                  print(context.customHeight(0.2));
+                },
+                child: Text('ContextExtension'))
           ],
         ),
       ),
