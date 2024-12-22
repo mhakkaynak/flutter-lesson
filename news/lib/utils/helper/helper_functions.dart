@@ -12,7 +12,8 @@ class HelperFunctions {
   }
 
   void showAlertDialog(
-      BuildContext context, CustomAlertDialogType type, String description) {
+      BuildContext context, CustomAlertDialogType type, String description,
+      {VoidCallback? onTap}) {
     OverlayState overlayState = Overlay.of(context);
     OverlayEntry? overlayEntry;
 
@@ -22,6 +23,7 @@ class HelperFunctions {
         type: type,
         description: description,
         onTap: () {
+          onTap?.call();
           overlayEntry?.remove();
         },
       );
