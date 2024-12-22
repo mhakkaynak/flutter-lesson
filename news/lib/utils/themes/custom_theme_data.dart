@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:news/core/extensions/context_extension.dart';
-import 'package:news/features/views/test_view.dart';
-import 'package:news/utils/themes/custom_color_sheme.dart';
+import '../../core/extensions/context_extension.dart';
+import '../../features/views/test_view.dart';
+import 'custom_color_sheme.dart';
 
 class CustomThemeData {
   CustomThemeData._init();
@@ -13,8 +13,9 @@ class CustomThemeData {
     return _instance!;
   }
 
-  ThemeData customTheme(BuildContext context) => ThemeData.light().copyWith(
-        colorScheme: CustomColorScheme.customColorSchema,
+  ThemeData getThemeDataLight(BuildContext context) =>
+      ThemeData.light().copyWith(
+        colorScheme: CustomColorScheme.colorSchemaLight,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
           elevation: 0,
@@ -27,7 +28,27 @@ class CustomThemeData {
         ),
         textTheme: TextTheme(
           headlineMedium: TextStyle(
-            fontSize: context.responsiveFontSize(32)
+            fontSize: context.responsiveFontSize(32),
+          ),
+        ),
+      );
+
+  ThemeData getThemeDataDark(BuildContext context) => ThemeData.dark().copyWith(
+        colorScheme: CustomColorScheme.colorSchemaDark,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.black),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: CustomColorScheme.colorSchemaDark.secondary,
+            foregroundColor: CustomColorScheme.colorSchemaDark.onSecondary
+          ),
+        ),
+        textTheme: TextTheme(
+          headlineMedium: TextStyle(
+            fontSize: context.responsiveFontSize(32),
           ),
         ),
       );

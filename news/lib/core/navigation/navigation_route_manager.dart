@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:news/features/views/authentication/login_view.dart';
-import 'package:news/features/views/home/home_view.dart';
-import 'package:news/features/views/navigator_view.dart';
-import 'package:news/features/views/test_view.dart';
-import 'package:news/utils/constants/navigation_constants.dart';
+import '../../features/views/authentication/login_view.dart';
+import '../../features/views/home/home_view.dart';
+import '../../features/views/navigator_view.dart';
+import '../../features/views/test_view.dart';
+import '../../utils/constants/navigation_constants.dart';
 
 class NavigationRouteManager {
   NavigationRouteManager._init();

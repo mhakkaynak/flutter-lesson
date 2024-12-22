@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:news/core/extensions/context_extension.dart';
-import 'package:news/core/extensions/string_extension.dart';
-import 'package:news/features/widgets/alerts/custom_alert_dialog.dart';
-import 'package:news/utils/helper/helper_functions.dart';
-import 'package:news/utils/themes/custom_theme_data.dart';
+import '../../core/extensions/context_extension.dart';
+import '../../core/extensions/string_extension.dart';
+import '../widgets/alerts/custom_alert_dialog.dart';
+import '../../utils/helper/helper_functions.dart';
+import '../../utils/themes/custom_theme_data.dart';
 
 class TestView extends StatefulWidget {
   const TestView({super.key});

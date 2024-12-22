@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news/features/widgets/alerts/custom_alert_dialog.dart';
+import '../../features/widgets/alerts/custom_alert_dialog.dart';
 
 class HelperFunctions {
   HelperFunctions._init();

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomColorScheme {
-  static Color primary = Colors.blue;
-  static Color secondary = Colors.purple;
+  static ColorScheme colorSchemaLight = const ColorScheme.light().copyWith(
+    primary: Colors.blue,
+    secondary: Colors.purple,
+  );
 
-  static ColorScheme customColorSchema = const ColorScheme.light().copyWith(
-    primary: primary,
-    secondary: secondary,
+  static ColorScheme colorSchemaDark = const ColorScheme.dark().copyWith(
+    primary: Colors.green,
+    secondary: Colors.pink,
   );
 }

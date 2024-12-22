@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:news/core/extensions/context_extension.dart';
-import 'package:news/core/navigation/navigation_manager.dart';
-import 'package:news/core/navigation/navigation_route_manager.dart';
-import 'package:news/features/views/authentication/login_view.dart';
-import 'package:news/features/views/navigator_view.dart';
-import 'package:news/features/views/test_view.dart';
-import 'package:news/utils/themes/custom_theme_data.dart';
+import 'core/extensions/context_extension.dart';
+import 'core/navigation/navigation_manager.dart';
+import 'core/navigation/navigation_route_manager.dart';
+import 'features/views/authentication/login_view.dart';
+import 'features/views/navigator_view.dart';
+import 'features/views/test_view.dart';
+import 'utils/themes/custom_theme_data.dart';
 import 'features/views/home/home_view.dart';
 
 void main() {
@@ -18,7 +18,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: context.themeData,
+      theme: context.themeDataLight,
+      darkTheme: context.themeDataDark,
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       navigatorKey: NavigationManager.instance.navigationKey,
       onGenerateRoute: (settings) =>

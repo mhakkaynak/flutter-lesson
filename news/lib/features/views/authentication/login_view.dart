@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:news/core/navigation/navigation_manager.dart';
-import 'package:news/features/widgets/inputs/password_text_form_field.dart';
-import 'package:news/utils/constants/navigation_constants.dart';
+import '../../../core/navigation/navigation_manager.dart';
+import '../../widgets/inputs/password_text_form_field.dart';
+import '../../../utils/constants/navigation_constants.dart';
 
 import '../home/home_view.dart';
 
