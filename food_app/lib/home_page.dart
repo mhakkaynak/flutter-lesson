@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/food.dart';
+import 'package:food_app/food_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,6 +10,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final FoodService _foodService = FoodService();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _typeController = TextEditingController();
+  final TextEditingController _ingredientsController = TextEditingController();
+  final TextEditingController _regionController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,8 +23,11 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Yemek Listesi'),
         actions: [
           IconButton(
-            onPressed: () {
-              // TODO: Clear All
+            onPressed: () async {
+              await _foodService.clearFoods();
+              setState(() {
+                _foodService.getFoods();
+              });
             },
             icon: const Icon(Icons.delete_forever_outlined),
           ),
@@ -24,57 +35,8 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView.builder(
         padding: EdgeInsets.symmetric(horizontal: 16),
-        itemCount: 10,
-        itemBuilder: (_, index) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black26,
-                ),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.75,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'name',
-                              style: const TextStyle(
-                                  fontSize: 24, fontWeight: FontWeight.bold),
-                            ),
-                            const Spacer(),
-                            const CircleAvatar(
-                              radius: 4,
-                              backgroundColor: Colors.black45,
-                            ),
-                            SizedBox(width: 8),
-                            Text('type'),
-                          ],
-                        ),
-                        Text('ingredients'),
-                        Text('region'),
-                      ],
-                    ),
-                  ),
-                  Spacer(),
-                  IconButton(
-                      onPressed: () {
-                        // TODO: remove food
-                      },
-                      icon: Icon(Icons.remove_circle_outline))
-                ],
-              ),
-            ),
-          );
-        },
+        itemCount: _foodService.foods.length,
+        itemBuilder: (_, index) => _buildListItem(index),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -93,21 +55,25 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
                       TextField(
+                        controller: _nameController,
                         decoration: InputDecoration(
                           labelText: 'Yemek Adı',
                         ),
                       ),
                       TextField(
+                        controller: _typeController,
                         decoration: InputDecoration(
                           labelText: 'Yemek Türü',
                         ),
                       ),
                       TextField(
+                        controller: _ingredientsController,
                         decoration: InputDecoration(
                           labelText: 'Yemek Malzemeleri',
                         ),
                       ),
                       TextField(
+                        controller: _regionController,
                         decoration: InputDecoration(
                           labelText: 'Yemek Yöresi',
                         ),
@@ -116,8 +82,20 @@ class _HomePageState extends State<HomePage> {
                         height: 32,
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          // TODO: add food
+                        onPressed: () async {
+                          Food food = Food(
+                            name: _nameController.text,
+                            type: _typeController.text,
+                            ingredients: _ingredientsController.text,
+                            region: _regionController.text,
+                          );
+                          await _foodService.addFood(food);
+                          setState(() {
+                            _foodService.getFoods();
+                          });
+                          if (context.mounted) {
+                            Navigator.pop(context);
+                          }
                         },
                         child: Text('Kaydet'),
                       ),
@@ -127,6 +105,61 @@ class _HomePageState extends State<HomePage> {
               });
         },
         child: const Icon(Icons.add_outlined),
+      ),
+    );
+  }
+
+  Padding _buildListItem(int index) {
+    Food food = _foodService.foods[index];
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Container(
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black26,
+          ),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.75,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        food.name,
+                        style: const TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      const Spacer(),
+                      const CircleAvatar(
+                        radius: 4,
+                        backgroundColor: Colors.black45,
+                      ),
+                      SizedBox(width: 8),
+                      Text(food.type),
+                    ],
+                  ),
+                  Text(food.ingredients),
+                  Text(food.region),
+                ],
+              ),
+            ),
+            Spacer(),
+            IconButton(
+                onPressed: () async {
+                  await _foodService.removeFood(index);
+                  setState(() {
+                    _foodService.getFoods();
+                  });
+                },
+                icon: Icon(Icons.remove_circle_outline))
+          ],
+        ),
       ),
     );
   }
