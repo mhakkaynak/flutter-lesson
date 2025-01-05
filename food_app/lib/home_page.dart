@@ -78,7 +78,53 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO: add new food - show bottom sheet
+          showModalBottomSheet(
+              context: context,
+              builder: (_) {
+                return Padding(
+                  padding: EdgeInsets.only(
+                    left: 16.0,
+                    right: 16.0,
+                    top: 16.0,
+                    bottom: MediaQuery.of(context)
+                        .viewInsets
+                        .bottom, // Klavye yüksekliğini ayarlar
+                  ),
+                  child: Column(
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Yemek Adı',
+                        ),
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Yemek Türü',
+                        ),
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Yemek Malzemeleri',
+                        ),
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Yemek Yöresi',
+                        ),
+                      ),
+                      SizedBox(
+                        height: 32,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          // TODO: add food
+                        },
+                        child: Text('Kaydet'),
+                      ),
+                    ],
+                  ),
+                );
+              });
         },
         child: const Icon(Icons.add_outlined),
       ),
