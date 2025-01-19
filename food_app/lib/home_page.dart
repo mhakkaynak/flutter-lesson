@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:food_app/food.dart';
 import 'package:food_app/food_provider.dart';
-import 'package:food_app/food_service.dart';
 
 class HomePage extends ConsumerWidget {
   HomePage({super.key});
