@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:food_app/food.dart';
-import 'package:food_app/food_provider.dart';
 import 'package:food_app/food_service.dart';
 
-class HomePage extends ConsumerWidget {
-  HomePage({super.key});
+class HomePageDeleted extends StatefulWidget {
+  const HomePageDeleted({super.key});
 
+  @override
+  State<HomePageDeleted> createState() => _HomePageDeletedState();
+}
+
+class _HomePageDeletedState extends State<HomePageDeleted> {
+  final FoodService _foodService = FoodService();
   final TextEditingController _ingredientsController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _regionController = TextEditingController();
   final TextEditingController _typeController = TextEditingController();
 
-  AppBar _buildAppBar(WidgetRef ref) {
+  AppBar _buildAppBar() {
     return AppBar(
       title: const Text('Yemek Listesi'),
       actions: [
         IconButton(
           onPressed: () async {
-            ref.watch(foodProvider.notifier).clearAll();
+            await _foodService.clearFoods();
+            setState(() {
+              _foodService.getFoods();
+            });
           },
           icon: const Icon(Icons.delete_forever_outlined),
         ),
@@ -26,20 +33,20 @@ class HomePage extends ConsumerWidget {
     );
   }
 
-  FloatingActionButton _buildFAB(BuildContext context, WidgetRef ref) {
+  FloatingActionButton _buildFAB(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
         showModalBottomSheet(
             context: context,
             builder: (_) {
-              return _buildBottomSheet(context, ref);
+              return _buildBottomSheet(context);
             });
       },
       child: const Icon(Icons.add_outlined),
     );
   }
 
-  Padding _buildBottomSheet(BuildContext context, WidgetRef ref) {
+  Padding _buildBottomSheet(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
         left: 16.0,
@@ -86,7 +93,10 @@ class HomePage extends ConsumerWidget {
                 ingredients: _ingredientsController.text,
                 region: _regionController.text,
               );
-              ref.watch(foodProvider.notifier).addFood(food);
+              await _foodService.addFood(food);
+              setState(() {
+                _foodService.getFoods();
+              });
               if (context.mounted) {
                 Navigator.pop(context);
               }
@@ -98,8 +108,8 @@ class HomePage extends ConsumerWidget {
     );
   }
 
-  Padding _buildListItem(
-      BuildContext context, Food food, int index, WidgetRef ref) {
+  Padding _buildListItem(int index) {
+    Food food = _foodService.foods[index];
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Container(
@@ -141,7 +151,10 @@ class HomePage extends ConsumerWidget {
             Spacer(),
             IconButton(
                 onPressed: () async {
-                  ref.watch(foodProvider.notifier).removeFood(index);
+                  await _foodService.removeFood(index);
+                  setState(() {
+                    _foodService.getFoods();
+                  });
                 },
                 icon: Icon(Icons.remove_circle_outline))
           ],
@@ -151,17 +164,15 @@ class HomePage extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final foods = ref.watch(foodProvider);
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(ref),
+      appBar: _buildAppBar(),
       body: ListView.builder(
         padding: EdgeInsets.symmetric(horizontal: 16),
-        itemCount: foods.length,
-        itemBuilder: (_, index) =>
-            _buildListItem(context, foods[index], index, ref),
+        itemCount: _foodService.foods.length,
+        itemBuilder: (_, index) => _buildListItem(index),
       ),
-      floatingActionButton: _buildFAB(context, ref),
+      floatingActionButton: _buildFAB(context),
     );
   }
 }
