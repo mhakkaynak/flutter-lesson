@@ -8,8 +8,8 @@ class NetworkService extends BaseNetworkManager {
   @override
   Future<dynamic> fetchData(String path) async {
     try {
-      var response = await dio.get(path);
-      return jsonDecode(response.toString());
+      Response<dynamic> response = await dio.get(path);
+      return response.data;
     } catch (e) {
       print(e);
     }
@@ -19,7 +19,7 @@ class NetworkService extends BaseNetworkManager {
   Future postData<T extends BaseModel>(String path, T model) async {
     try {
       var response = await dio.post(path, data: model.toJson());
-      return jsonDecode(response.toString());
+      return response.data;
     } catch (e) {
       print(e);
     }

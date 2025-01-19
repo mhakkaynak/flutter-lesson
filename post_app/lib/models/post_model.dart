@@ -10,9 +10,9 @@ class PostModel extends BaseModel {
 
   PostModel._fromJson(o) {
     body = o['body'];
-    id = int.tryParse(o['id']);
+    id = int.tryParse(o['id'].toString());
     title = o['title'];
-    userId = int.tryParse(o['userId']);
+    userId = int.tryParse(o['userId'].toString());
   }
 
   @override
