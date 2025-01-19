@@ -11,9 +11,7 @@ class FoodService {
 
   List<Food> foods = [];
 
-  void getFoods() {
-    foods = _foodBox.values.toList();
-  }
+  List<Food> getFoods() => _foodBox.values.toList();
 
   Food? getFood(int index) => _foodBox.getAt(index);
 
